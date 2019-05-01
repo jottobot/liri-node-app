@@ -32,15 +32,15 @@ if (command1 === 'concert-this') {
   doWhatItSays();
 }
 
-function concertThis(command2) {
+function concertThis(artist) {
   // axios search for BANDSINTOWN
   axios
     .get(
       'https://rest.bandsintown.com/artists/' +
-        artist +
-        '/events?app_id=codingbootcamp'
+      artist +
+      '/events?app_id=codingbootcamp'
     )
-    .then(function(response) {
+    .then(function (response) {
       console.log(response.data);
       if (!response.data[0]) {
         console.log('No concerts found!');
@@ -56,51 +56,55 @@ function concertThis(command2) {
 }
 
 function spotifyThis(song) {
-  if (songName === undefined) {
-    songName = "What's my age again";
+  if (song === undefined) {
+    song = "The sign";
   }
-  var spotify = new Spotify({
-    id: keys.spotify.id,
-    secret: keys.spotify.secret
-  });
+  // else {
+    var spotify = new Spotify({
+      id: keys.spotify.id,
+      secret: keys.spotify.secret
+    });
 
-  spotify.search(
-    {
-      type: 'track',
-      query: song
-    },
-    function(err, data) {
-      if (err) {
-        console.log('Error occurred: ' + err);
-        return;
+    spotify.search(
+      {
+        type: 'track',
+        query: song
+      },
+      function (err, data) {
+        if (err) {
+          console.log('Error occurred: ' + err);
+          return;
+        }
+
+        var songs = data.tracks.items;
+
+        for (var i = 0; i < 5; i++) {
+          console.log('Song name: ' + songs[i].name);
+          console.log('Preview: ' + songs[i].preview_url);
+          console.log('Album: ' + songs[i].album.name);
+          console.log('-----------------------------------');
+        }
       }
+    );
+  }
+// };
 
-      var songs = data.tracks.items;
-
-      for (var i = 0; i < songs.length; i++) {
-        console.log(i);
-        console.log('song name: ' + songs[i].name);
-        console.log('preview song: ' + songs[i].preview_url);
-        console.log('album: ' + songs[i].album.name);
-        console.log('-----------------------------------');
-      }
-    }
-  );
-}
-
-function movieThis(command2) {
+function movieThis(movie) {
+  if (movie === undefined) {
+    movie = "Mr. Nobody";
+  }
   // axios search for OMDB
   axios
     .get(
       'http://www.omdbapi.com/?t=' +
-        movie +
-        '&y=&plot=full&tomatoes=true&apikey=trilogy'
+      movie +
+      '&y=&plot=full&tomatoes=true&apikey=trilogy'
     )
-    .then(function(response) {
+    .then(function (response) {
       console.log('Title: ' + response.data.Title);
       console.log('Release year: ' + response.data.Year);
       console.log('IMDB: ' + response.data.imdbRating);
-      console.log('Rotten Tomatoes Rating: ' + response.data.Ratings[1].Value);
+      // console.log('Rotten Tomatoes Rating: ' + response.data.Ratings[1].Value);
       console.log('Produced in: ' + response.data.Country);
       console.log('Language: ' + response.data.Language);
       console.log('Plot: ' + response.data.Plot);
