@@ -30,4 +30,4 @@ Concert-this will print name of the venue, venue location. and date of concert.
 
 
 ## Link to see how Liri works
-[Video example: ](https://drive.google.com/file/d/1Ijh8ZYC7Cu6OEPUH0ltky_GmqaSh4HMJ/view)
+[Video example](https://drive.google.com/file/d/1Ijh8ZYC7Cu6OEPUH0ltky_GmqaSh4HMJ/view)
